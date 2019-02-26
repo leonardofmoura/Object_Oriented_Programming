@@ -1,4 +1,3 @@
-import com.googlecode.lanterna.TextCharacter;
 import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.screen.TerminalScreen;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
@@ -22,7 +21,7 @@ public class Game {
             e.printStackTrace();
         }
 
-        hero = new Hero(10,10);
+        hero = new Hero();
     }
 
     private void draw() throws  IOException {
@@ -36,16 +35,16 @@ public class Game {
 
         switch (key.getKeyType()) {
             case ArrowUp:
-                hero.moveUp();
+                moveHero(hero.moveUp());
                 break;
             case ArrowDown:
-                hero.moveDown();
+                moveHero(hero.moveDown());
                 break;
             case ArrowRight:
-                hero.moveRight();
+                moveHero(hero.moveRight());
                 break;
             case ArrowLeft:
-                hero.moveLeft();
+                moveHero(hero.moveLeft());
                 break;
             case EOF:
                 return 1;
@@ -58,6 +57,10 @@ public class Game {
                 break;
         }
         return 0;
+    }
+
+    private void moveHero(Position position) {
+        hero.setPosition(position);
     }
 
     public KeyStroke readInput() throws IOException {
