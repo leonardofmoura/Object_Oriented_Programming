@@ -8,8 +8,7 @@ import java.io.IOException;
 
 public class Game {
     private TerminalScreen screen;
-    private int x = 10;
-    private int y = 10;
+    private Hero hero;
 
     public Game() {
         try {
@@ -22,12 +21,14 @@ public class Game {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        hero = new Hero(10,10);
     }
 
     private void draw() throws  IOException {
         screen.clear();
         screen.doResizeIfNecessary();
-        screen.setCharacter(x,y, new TextCharacter('X'));
+        hero.draw(screen);
         screen.refresh();
     }
 
@@ -35,16 +36,16 @@ public class Game {
 
         switch (key.getKeyType()) {
             case ArrowUp:
-                y -= 1;
+                hero.moveUp();
                 break;
             case ArrowDown:
-                y += 1;
+                hero.moveDown();
                 break;
             case ArrowRight:
-                x += 1;
+                hero.moveRight();
                 break;
             case ArrowLeft:
-                x -= 1;
+                hero.moveLeft();
                 break;
             case EOF:
                 return 1;
