@@ -52,6 +52,11 @@ public class ListAggregatorTest {
         negList.add(-4);
         negList.add(-5);
 
+        ListAggregator aggregator = new ListAggregator(negList);
+
+        int max = aggregator.max();
+
+        assertEquals(-1,max);
     }
 
     @Test
