@@ -2,11 +2,12 @@ package com.aor.numbers;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mockito;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class ListAggregatorTest {
     private List<Integer> list;
@@ -51,11 +52,6 @@ public class ListAggregatorTest {
         negList.add(-4);
         negList.add(-5);
 
-        ListAggregator aggregator = new ListAggregator(negList);
-
-        int max = aggregator.max();
-
-        assertEquals(-1,max);
     }
 
     @Test
@@ -84,9 +80,33 @@ public class ListAggregatorTest {
         bugList.add(4);
         bugList.add(2);
 
-        ListAggregator aggregator = new ListAggregator(bugList); //this does nothing in this test
+        ListAggregator aggregator = new ListAggregator(bugList);
 
         int distinct = aggregator.distinct(new stubDeduplicator());
+
+        assertEquals(3,distinct);
+    }
+
+    @Test
+    public void distinctBugMockito() {
+        IListDeduplicator deduplicator = Mockito.mock(IListDeduplicator.class);
+
+        List<Integer> deduplicated = new ArrayList<>();
+        deduplicated.add(1);
+        deduplicated.add(2);
+        deduplicated.add(4);
+
+        Mockito.when(deduplicator.deduplicate()).thenReturn(deduplicated);
+
+        List<Integer> bugList = new ArrayList<>();
+        bugList.add(1);
+        bugList.add(2);
+        bugList.add(4);
+        bugList.add(2);
+
+        ListAggregator aggregator = new ListAggregator(bugList);
+
+        int distinct = aggregator.distinct(deduplicator);
 
         assertEquals(3,distinct);
     }
