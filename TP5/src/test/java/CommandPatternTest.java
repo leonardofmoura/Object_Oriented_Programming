@@ -5,7 +5,7 @@ import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
-public class CommandPatternTests {
+public class CommandPatternTest {
     @Test
     public void stringDrink() {
         StringDrink drink = new StringDrink("ABCD");

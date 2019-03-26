@@ -5,7 +5,7 @@ import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
-public class CompositePatternTests {
+public class CompositePatternTest {
     @Test
     public void transformerGroup() {
         StringDrink drink = new StringDrink( "AbCd-aBcD");
