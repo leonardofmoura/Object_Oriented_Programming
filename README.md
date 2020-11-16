@@ -14,6 +14,10 @@ Exercises solved to gain some practical insight on how some algorithms and data 
 - **TP5:** Design Patterns
 - **TP6:** Refactoring
 
+## Project 
+
+Project developed in the course, implementing all concepts above.  Calamity: Black Nights Onward is a game inspired by the CDDA ([_Cataclysm: Dark Days Ahead_](https://cataclysmdda.org/)). A Post-Apocalyptic Survival Game. 
+
 ---
 
 **Note**:If find some mistake in this readme or any other part of this repo, feel free to tell me about it!

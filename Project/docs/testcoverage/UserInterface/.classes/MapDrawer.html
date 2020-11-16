@@ -1,0 +1,139 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: MapDrawer</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">UserInterface</a> ]
+</div>
+
+<h1>Coverage Summary for Class: MapDrawer (UserInterface)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">MapDrawer</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 20)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package UserInterface;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import Game.GameMap;
+<i>4</i>&nbsp;import GameCore.Enemy;
+<i>5</i>&nbsp;import GameCore.Entity;
+<i>6</i>&nbsp;import GameCore.MapElements.Door;
+<i>7</i>&nbsp;import GameCore.MapElements.Wall;
+<i>8</i>&nbsp;import GameCore.Position;
+<i>9</i>&nbsp;
+<i>10</i>&nbsp;import java.io.IOException;
+<i>11</i>&nbsp;import java.util.ArrayList;
+<i>12</i>&nbsp;
+<i>13</i>&nbsp;public class MapDrawer {
+<i>14</i>&nbsp;    private GameMap map;
+<i>15</i>&nbsp;    private Screen screen;
+<i>16</i>&nbsp;    private Position centerCoords;
+<i>17</i>&nbsp;    private int maxDrawCoord;
+<i>18</i>&nbsp;
+<b class="nc"><i>19</i>&nbsp;    public MapDrawer(GameMap map, Screen screen, int maxDrawCoord) throws IOException {</b>
+<b class="nc"><i>20</i>&nbsp;        this.map = map;</b>
+<b class="nc"><i>21</i>&nbsp;        this.screen = screen;</b>
+<b class="nc"><i>22</i>&nbsp;        this.centerCoords = screen.getCenterCoords();</b>
+<b class="nc"><i>23</i>&nbsp;        this.maxDrawCoord = maxDrawCoord;</b>
+<i>24</i>&nbsp;    }
+<i>25</i>&nbsp;
+<i>26</i>&nbsp;    public void setCoords(Position centerCoords,int maxDrawCoord) {
+<b class="nc"><i>27</i>&nbsp;        this.centerCoords = centerCoords;</b>
+<b class="nc"><i>28</i>&nbsp;        this.maxDrawCoord = maxDrawCoord;</b>
+<i>29</i>&nbsp;    }
+<i>30</i>&nbsp;
+<i>31</i>&nbsp;    public void drawMap() {
+<i>32</i>&nbsp;        //draw the player
+<b class="nc"><i>33</i>&nbsp;        PlayerDrawer playerDrawer = new PlayerDrawer(map.getPlayer(),centerCoords,maxDrawCoord);</b>
+<i>34</i>&nbsp;
+<i>35</i>&nbsp;
+<b class="nc"><i>36</i>&nbsp;        ArrayList&lt;Entity&gt; entities = map.getEnteties();</b>
+<b class="nc"><i>37</i>&nbsp;        DrawerComposite drawers = new DrawerComposite();</b>
+<i>38</i>&nbsp;
+<b class="nc"><i>39</i>&nbsp;        for (Entity i : entities</b>
+<i>40</i>&nbsp;             ) {
+<b class="nc"><i>41</i>&nbsp;            if (i instanceof Door) {</b>
+<b class="nc"><i>42</i>&nbsp;                drawers.add(new DoorDrawer(i,centerCoords,maxDrawCoord,((Door) i).isOpen()));</b>
+<i>43</i>&nbsp;            }
+<b class="nc"><i>44</i>&nbsp;            else if (i instanceof Wall) {</b>
+<b class="nc"><i>45</i>&nbsp;                drawers.add(new WallDrawer(i,centerCoords,maxDrawCoord));</b>
+<i>46</i>&nbsp;            }
+<b class="nc"><i>47</i>&nbsp;            else if (i instanceof Enemy) {</b>
+<b class="nc"><i>48</i>&nbsp;                drawers.add(new EnemyDrawer(i,centerCoords,maxDrawCoord));</b>
+<i>49</i>&nbsp;            }
+<b class="nc"><i>50</i>&nbsp;        }</b>
+<i>51</i>&nbsp;
+<b class="nc"><i>52</i>&nbsp;        drawers.draw(screen,map.getPlayer().getPosition());</b>
+<i>53</i>&nbsp;
+<b class="nc"><i>54</i>&nbsp;        playerDrawer.draw(screen,map.getPlayer().getPosition());</b>
+<i>55</i>&nbsp;    }
+<i>56</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2019-06-02 23:46</div>
+</div>
+</body>
+</html>

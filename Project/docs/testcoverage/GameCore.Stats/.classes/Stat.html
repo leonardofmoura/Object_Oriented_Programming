@@ -1,0 +1,121 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: Stat</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">GameCore.Stats</a> ]
+</div>
+
+<h1>Coverage Summary for Class: Stat (GameCore.Stats)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Stat</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (6/ 6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (16/ 16)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package GameCore.Stats;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import java.util.ArrayList;
+<i>4</i>&nbsp;import java.util.List;
+<i>5</i>&nbsp;
+<i>6</i>&nbsp;public class Stat {
+<i>7</i>&nbsp;    int value;
+<i>8</i>&nbsp;
+<i>9</i>&nbsp;
+<b class="fc"><i>10</i>&nbsp;    private List&lt;Integer&gt; buff_buffer = new ArrayList&lt;&gt; ();</b>
+<b class="fc"><i>11</i>&nbsp;    Stat(int value){</b>
+<b class="fc"><i>12</i>&nbsp;        this.value = (value &gt;= 0) ? value : 0;</b>
+<b class="fc"><i>13</i>&nbsp;    }</b>
+<i>14</i>&nbsp;
+<i>15</i>&nbsp;    public int getValue() {
+<b class="fc"><i>16</i>&nbsp;        int tmp = value;</b>
+<b class="fc"><i>17</i>&nbsp;        for (int val: buff_buffer) {</b>
+<b class="fc"><i>18</i>&nbsp;            tmp += val;</b>
+<b class="fc"><i>19</i>&nbsp;        }</b>
+<b class="fc"><i>20</i>&nbsp;        return (tmp &gt;= 0) ? tmp : 0;</b>
+<i>21</i>&nbsp;    }
+<i>22</i>&nbsp;
+<i>23</i>&nbsp;    public void setValue(int value) {
+<b class="fc"><i>24</i>&nbsp;        this.value = (value &gt;= 0) ? value : 0;</b>
+<b class="fc"><i>25</i>&nbsp;    }</b>
+<i>26</i>&nbsp;
+<i>27</i>&nbsp;    void add_buff(int value){
+<b class="fc"><i>28</i>&nbsp;        this.buff_buffer.add(value);</b>
+<b class="fc"><i>29</i>&nbsp;    }</b>
+<i>30</i>&nbsp;
+<i>31</i>&nbsp;    void clear_buffs(){
+<b class="fc"><i>32</i>&nbsp;        this.buff_buffer.clear();</b>
+<b class="fc"><i>33</i>&nbsp;    }</b>
+<i>34</i>&nbsp;
+<i>35</i>&nbsp;    public List&lt;Integer&gt; getBuff_buffer() {
+<b class="fc"><i>36</i>&nbsp;        return buff_buffer;</b>
+<i>37</i>&nbsp;    }
+<i>38</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2019-06-02 23:46</div>
+</div>
+</body>
+</html>

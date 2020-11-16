@@ -1,0 +1,111 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: Body_Part_Equip</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">GameCore.Item</a> ]
+</div>
+
+<h1>Coverage Summary for Class: Body_Part_Equip (GameCore.Item)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Body_Part_Equip</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 17)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package GameCore.Item;
+<i>2</i>&nbsp;
+<b class="nc"><i>3</i>&nbsp;public enum Body_Part_Equip {</b>
+<b class="nc"><i>4</i>&nbsp;    HEAD(0),</b>
+<b class="nc"><i>5</i>&nbsp;    TORSO(1),</b>
+<b class="nc"><i>6</i>&nbsp;    LEGS(2) ,</b>
+<b class="nc"><i>7</i>&nbsp;    FEET(3) ,</b>
+<b class="nc"><i>8</i>&nbsp;    LFT_HAND(4),</b>
+<b class="nc"><i>9</i>&nbsp;    RGT_HAND(5);</b>
+<i>10</i>&nbsp;
+<i>11</i>&nbsp;    public final int val;
+<i>12</i>&nbsp;
+<b class="nc"><i>13</i>&nbsp;    Body_Part_Equip(final int value){</b>
+<b class="nc"><i>14</i>&nbsp;        this.val = value;</b>
+<i>15</i>&nbsp;    }
+<i>16</i>&nbsp;
+<i>17</i>&nbsp;    public static String getPart(int i){
+<b class="nc"><i>18</i>&nbsp;        switch (i){</b>
+<b class="nc"><i>19</i>&nbsp;            case 0: return &quot;Head&quot;;</b>
+<b class="nc"><i>20</i>&nbsp;            case 1: return &quot;Torso&quot;;</b>
+<b class="nc"><i>21</i>&nbsp;            case 2: return &quot;Legs&quot;;</b>
+<b class="nc"><i>22</i>&nbsp;            case 3: return &quot;Feet&quot;;</b>
+<b class="nc"><i>23</i>&nbsp;            case 4: return &quot;Left Hand&quot;;</b>
+<b class="nc"><i>24</i>&nbsp;            case 5: return &quot;Right Hand&quot;;</b>
+<b class="nc"><i>25</i>&nbsp;            default: return &quot;&quot;;</b>
+<i>26</i>&nbsp;        }
+<i>27</i>&nbsp;    }
+<i>28</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2019-06-02 23:46</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,131 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: EntityDrawer</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">UserInterface</a> ]
+</div>
+
+<h1>Coverage Summary for Class: EntityDrawer (UserInterface)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">EntityDrawer</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 13)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package UserInterface;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import GameCore.Drawable;
+<i>4</i>&nbsp;import GameCore.Entity;
+<i>5</i>&nbsp;import GameCore.InvalidPosition;
+<i>6</i>&nbsp;import GameCore.Position;
+<i>7</i>&nbsp;import UserInterface.Screen;
+<i>8</i>&nbsp;
+<i>9</i>&nbsp;//Responsable for drawing a DRAWABLE object on the screen
+<i>10</i>&nbsp;public abstract class EntityDrawer {
+<i>11</i>&nbsp;    private Entity toDraw;
+<i>12</i>&nbsp;    private Position centerCoords;
+<i>13</i>&nbsp;    private int maxDrawCoord;
+<i>14</i>&nbsp;
+<b class="nc"><i>15</i>&nbsp;    EntityDrawer()  {</b>
+<i>16</i>&nbsp;
+<i>17</i>&nbsp;    }
+<i>18</i>&nbsp;
+<b class="nc"><i>19</i>&nbsp;    EntityDrawer(Entity toDraw, Position centerCoords, int maxDrawCoord) {</b>
+<b class="nc"><i>20</i>&nbsp;        this.toDraw = toDraw;</b>
+<b class="nc"><i>21</i>&nbsp;        this.centerCoords = centerCoords;</b>
+<b class="nc"><i>22</i>&nbsp;        this.maxDrawCoord = maxDrawCoord;</b>
+<i>23</i>&nbsp;    }
+<i>24</i>&nbsp;
+<i>25</i>&nbsp;    protected Entity getToDraw() {
+<b class="nc"><i>26</i>&nbsp;        return this.toDraw;</b>
+<i>27</i>&nbsp;    }
+<i>28</i>&nbsp;
+<i>29</i>&nbsp;    protected Position getCenterCoords() {
+<b class="nc"><i>30</i>&nbsp;        return centerCoords;</b>
+<i>31</i>&nbsp;    }
+<i>32</i>&nbsp;
+<i>33</i>&nbsp;    protected Position calcDrawPos(Position playerPosition) {
+<b class="nc"><i>34</i>&nbsp;        Position pos = toDraw.getPosition();</b>
+<i>35</i>&nbsp;
+<b class="nc"><i>36</i>&nbsp;        int drawX = pos.getX() - playerPosition.getX() + centerCoords.getX();</b>
+<b class="nc"><i>37</i>&nbsp;        int drawY = pos.getY() - playerPosition.getY() + centerCoords.getY();</b>
+<i>38</i>&nbsp;
+<b class="nc"><i>39</i>&nbsp;        if (drawX &lt; maxDrawCoord) {</b>
+<b class="nc"><i>40</i>&nbsp;            return new Position(drawX,drawY);</b>
+<i>41</i>&nbsp;        }
+<i>42</i>&nbsp;        else {
+<b class="nc"><i>43</i>&nbsp;            return null;</b>
+<i>44</i>&nbsp;        }
+<i>45</i>&nbsp;    }
+<i>46</i>&nbsp;
+<i>47</i>&nbsp;    public abstract void draw(Screen screen, Position playerPosition);
+<i>48</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2019-06-02 23:46</div>
+</div>
+</body>
+</html>

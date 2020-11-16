@@ -1,0 +1,337 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: LanternaMainScreen</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">UserInterface.Lanterna</a> ]
+</div>
+
+<h1>Coverage Summary for Class: LanternaMainScreen (UserInterface.Lanterna)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">LanternaMainScreen</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 23)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 114)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package UserInterface.Lanterna;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import GameCore.Item.Body_Part_Equip;
+<i>4</i>&nbsp;import GameCore.Item.Item;
+<i>5</i>&nbsp;import GameCore.Position;
+<i>6</i>&nbsp;import GameCore.Stats.EStat;
+<i>7</i>&nbsp;import UserInterface.Screen;
+<i>8</i>&nbsp;import com.googlecode.lanterna.TerminalSize;
+<i>9</i>&nbsp;import com.googlecode.lanterna.TextColor;
+<i>10</i>&nbsp;import com.googlecode.lanterna.graphics.TextGraphics;
+<i>11</i>&nbsp;import com.googlecode.lanterna.screen.TerminalScreen;
+<i>12</i>&nbsp;import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
+<i>13</i>&nbsp;import com.googlecode.lanterna.terminal.Terminal;
+<i>14</i>&nbsp;
+<i>15</i>&nbsp;import java.awt.*;
+<i>16</i>&nbsp;import java.io.IOException;
+<i>17</i>&nbsp;import java.util.List;
+<i>18</i>&nbsp;
+<i>19</i>&nbsp;import static java.lang.String.valueOf;
+<i>20</i>&nbsp;
+<i>21</i>&nbsp;public class LanternaMainScreen implements Screen {
+<i>22</i>&nbsp;    private Terminal terminal;
+<i>23</i>&nbsp;    private com.googlecode.lanterna.screen.Screen screen;
+<i>24</i>&nbsp;    private TextGraphics graphics;
+<b class="nc"><i>25</i>&nbsp;    private final int tabSize = 50;</b>
+<i>26</i>&nbsp;
+<b class="nc"><i>27</i>&nbsp;    public LanternaMainScreen() throws IOException {</b>
+<b class="nc"><i>28</i>&nbsp;        terminal = new DefaultTerminalFactory().setInitialTerminalSize(new TerminalSize(200,50)).createTerminal();</b>
+<b class="nc"><i>29</i>&nbsp;        screen = new TerminalScreen(terminal);</b>
+<b class="nc"><i>30</i>&nbsp;        graphics = screen.newTextGraphics();</b>
+<i>31</i>&nbsp;
+<b class="nc"><i>32</i>&nbsp;        screen.setCursorPosition(null);</b>
+<b class="nc"><i>33</i>&nbsp;        screen.startScreen();</b>
+<b class="nc"><i>34</i>&nbsp;        screen.doResizeIfNecessary();</b>
+<i>35</i>&nbsp;    }
+<i>36</i>&nbsp;
+<b class="nc"><i>37</i>&nbsp;    public LanternaMainScreen(int columns, int rows) throws IOException {</b>
+<b class="nc"><i>38</i>&nbsp;        terminal = new DefaultTerminalFactory().setInitialTerminalSize(new TerminalSize(columns,rows)).createTerminal();</b>
+<b class="nc"><i>39</i>&nbsp;        screen = new TerminalScreen(terminal);</b>
+<b class="nc"><i>40</i>&nbsp;        graphics = screen.newTextGraphics();</b>
+<i>41</i>&nbsp;
+<b class="nc"><i>42</i>&nbsp;        screen.setCursorPosition(null);</b>
+<b class="nc"><i>43</i>&nbsp;        screen.startScreen();</b>
+<b class="nc"><i>44</i>&nbsp;        screen.doResizeIfNecessary();</b>
+<i>45</i>&nbsp;    }
+<i>46</i>&nbsp;
+<b class="nc"><i>47</i>&nbsp;    public LanternaMainScreen(Terminal terminal) throws IOException {</b>
+<b class="nc"><i>48</i>&nbsp;        this.terminal = terminal;</b>
+<b class="nc"><i>49</i>&nbsp;        screen = new TerminalScreen(terminal);</b>
+<b class="nc"><i>50</i>&nbsp;        graphics = screen.newTextGraphics();</b>
+<i>51</i>&nbsp;
+<b class="nc"><i>52</i>&nbsp;        screen.setCursorPosition(null);</b>
+<b class="nc"><i>53</i>&nbsp;        screen.startScreen();</b>
+<b class="nc"><i>54</i>&nbsp;        screen.doResizeIfNecessary();</b>
+<i>55</i>&nbsp;
+<i>56</i>&nbsp;    }
+<i>57</i>&nbsp;
+<i>58</i>&nbsp;    public void close() throws IOException {
+<b class="nc"><i>59</i>&nbsp;        terminal.close();</b>
+<i>60</i>&nbsp;    }
+<i>61</i>&nbsp;
+<i>62</i>&nbsp;    public String readInput() throws IOException {
+<b class="nc"><i>63</i>&nbsp;        return parseArrows(screen.readInput().getKeyType().toString());</b>
+<i>64</i>&nbsp;    }
+<i>65</i>&nbsp;
+<i>66</i>&nbsp;    private String parseArrows(String key) {
+<b class="nc"><i>67</i>&nbsp;        switch (key) {</b>
+<i>68</i>&nbsp;            case  &quot;ArrowUp&quot;:
+<b class="nc"><i>69</i>&nbsp;                return &quot;Up&quot;;</b>
+<i>70</i>&nbsp;
+<i>71</i>&nbsp;            case &quot;ArrowDown&quot; :
+<b class="nc"><i>72</i>&nbsp;                return &quot;Down&quot;;</b>
+<i>73</i>&nbsp;
+<i>74</i>&nbsp;            case &quot;ArrowLeft&quot; :
+<b class="nc"><i>75</i>&nbsp;                return &quot;Left&quot;;</b>
+<i>76</i>&nbsp;
+<i>77</i>&nbsp;            case &quot;ArrowRight&quot;:
+<b class="nc"><i>78</i>&nbsp;                return &quot;Right&quot;;</b>
+<i>79</i>&nbsp;
+<i>80</i>&nbsp;             default:
+<b class="nc"><i>81</i>&nbsp;                 return key;</b>
+<i>82</i>&nbsp;        }
+<i>83</i>&nbsp;    }
+<i>84</i>&nbsp;
+<i>85</i>&nbsp;    public void drawSideLine() throws IOException {
+<b class="nc"><i>86</i>&nbsp;        graphics.setBackgroundColor(TextColor.ANSI.BLACK);</b>
+<b class="nc"><i>87</i>&nbsp;        graphics.setForegroundColor(TextColor.ANSI.WHITE);</b>
+<i>88</i>&nbsp;
+<b class="nc"><i>89</i>&nbsp;        for (int i = 0; i &lt; terminal.getTerminalSize().getRows(); i++) {</b>
+<b class="nc"><i>90</i>&nbsp;            putString(terminal.getTerminalSize().getColumns() - tabSize, i, &quot; &quot;,TextColor.ANSI.WHITE.toColor(),TextColor.ANSI.WHITE.toColor());</b>
+<i>91</i>&nbsp;        }
+<i>92</i>&nbsp;
+<i>93</i>&nbsp;        //screen.doResizeIfNecessary();
+<i>94</i>&nbsp;        //screen.refresh();
+<i>95</i>&nbsp;    }
+<i>96</i>&nbsp;
+<i>97</i>&nbsp;    public void clear() {
+<b class="nc"><i>98</i>&nbsp;        screen.clear();</b>
+<i>99</i>&nbsp;    }
+<i>100</i>&nbsp;
+<i>101</i>&nbsp;    public void putString(int x, int y, String string) {
+<b class="nc"><i>102</i>&nbsp;        graphics.setForegroundColor(TextColor.ANSI.WHITE);</b>
+<b class="nc"><i>103</i>&nbsp;        graphics.setBackgroundColor(TextColor.ANSI.BLACK);</b>
+<b class="nc"><i>104</i>&nbsp;        graphics.putString(x,y,string);</b>
+<i>105</i>&nbsp;    }
+<i>106</i>&nbsp;
+<i>107</i>&nbsp;    public void putString(int x, int y, String string, Color background, Color foreground) {
+<b class="nc"><i>108</i>&nbsp;        int[] backArray = new int[3];</b>
+<b class="nc"><i>109</i>&nbsp;        backArray[0] = background.getRed();</b>
+<b class="nc"><i>110</i>&nbsp;        backArray[1] = background.getGreen();</b>
+<b class="nc"><i>111</i>&nbsp;        backArray[2] = background.getBlue();</b>
+<i>112</i>&nbsp;
+<b class="nc"><i>113</i>&nbsp;        int[] foreArray = new int[3];</b>
+<b class="nc"><i>114</i>&nbsp;        foreArray[0] = foreground.getRed();</b>
+<b class="nc"><i>115</i>&nbsp;        foreArray[1] = foreground.getGreen();</b>
+<b class="nc"><i>116</i>&nbsp;        foreArray[2] = foreground.getBlue();</b>
+<i>117</i>&nbsp;
+<b class="nc"><i>118</i>&nbsp;        graphics.setBackgroundColor(new TextColor.RGB( backArray[0],backArray[1], backArray[2]));</b>
+<b class="nc"><i>119</i>&nbsp;        graphics.setForegroundColor(new TextColor.RGB( foreArray[0],  foreArray[1], foreArray[2]));</b>
+<b class="nc"><i>120</i>&nbsp;        graphics.putString(x,y,string);</b>
+<i>121</i>&nbsp;    }
+<i>122</i>&nbsp;
+<i>123</i>&nbsp;    public void refresh() throws IOException {
+<b class="nc"><i>124</i>&nbsp;        screen.doResizeIfNecessary();</b>
+<b class="nc"><i>125</i>&nbsp;        screen.refresh();</b>
+<i>126</i>&nbsp;    }
+<i>127</i>&nbsp;
+<i>128</i>&nbsp;    public Position getCenterCoords() throws IOException {
+<b class="nc"><i>129</i>&nbsp;        return new Position((terminal.getTerminalSize().getColumns() - 50)/2,terminal.getTerminalSize().getRows()/2);</b>
+<i>130</i>&nbsp;    }
+<i>131</i>&nbsp;
+<i>132</i>&nbsp;
+<i>133</i>&nbsp;    public int getMaxDrawCoord() throws IOException {
+<b class="nc"><i>134</i>&nbsp;        return terminal.getTerminalSize().getColumns() - tabSize;</b>
+<i>135</i>&nbsp;    }
+<i>136</i>&nbsp;
+<i>137</i>&nbsp;    public void drawTitle() {
+<b class="nc"><i>138</i>&nbsp;        putString(160,4,&quot;Calamity: Black Nights Onward!&quot;,TextColor.ANSI.BLACK.toColor(),new TextColor.RGB(255,255,51).toColor());</b>
+<i>139</i>&nbsp;
+<i>140</i>&nbsp;    }
+<i>141</i>&nbsp;
+<i>142</i>&nbsp;    public void drawPlayerCoords(int x,int y){
+<b class="nc"><i>143</i>&nbsp;        putString(160,2,valueOf(x) + &quot;   &quot; + valueOf(y) ,TextColor.ANSI.BLACK.toColor(),new TextColor.RGB(255,255,51).toColor());</b>
+<i>144</i>&nbsp;    }
+<i>145</i>&nbsp;
+<i>146</i>&nbsp;    private void drawBar(int x, int y, int percentage,Color fg, Color bg){
+<b class="nc"><i>147</i>&nbsp;        for (int i = 0; i &lt; percentage  ; i++) {</b>
+<b class="nc"><i>148</i>&nbsp;            putString(x+i,y,&quot; &quot;,fg,bg);</b>
+<i>149</i>&nbsp;        }
+<i>150</i>&nbsp;    }
+<i>151</i>&nbsp;
+<i>152</i>&nbsp;    private int getfrac(int value, int max_value, int multiplier){
+<b class="nc"><i>153</i>&nbsp;        double tmp = (double) value / (double) max_value;</b>
+<b class="nc"><i>154</i>&nbsp;        int tmpret = (int) Math.round(tmp*multiplier);</b>
+<b class="nc"><i>155</i>&nbsp;        return ( tmpret &gt; 20) ? 20 : tmpret;</b>
+<i>156</i>&nbsp;    }
+<i>157</i>&nbsp;
+<i>158</i>&nbsp;    public void drawHealth(int playerHealth, int maxPlayerHealth) {
+<b class="nc"><i>159</i>&nbsp;        int frac = getfrac(playerHealth,maxPlayerHealth,20);</b>
+<i>160</i>&nbsp;
+<b class="nc"><i>161</i>&nbsp;        putString(160,8,&quot;HP:&quot;,TextColor.ANSI.BLACK.toColor(),new TextColor.RGB(255,0,0).toColor());</b>
+<b class="nc"><i>162</i>&nbsp;        putString(163,8, valueOf(playerHealth));</b>
+<i>163</i>&nbsp;
+<b class="nc"><i>164</i>&nbsp;        drawBar(168 , 8, 20, new TextColor.RGB(100,0,0).toColor(), TextColor.ANSI.BLACK.toColor());</b>
+<b class="nc"><i>165</i>&nbsp;        drawBar(168,8,frac,new TextColor.RGB(255,0,0).toColor(),TextColor.ANSI.BLACK.toColor());</b>
+<i>166</i>&nbsp;    }
+<i>167</i>&nbsp;
+<i>168</i>&nbsp;    public void drawHunger(int playerHunger) {
+<b class="nc"><i>169</i>&nbsp;        int frac = getfrac(playerHunger,100,20);</b>
+<i>170</i>&nbsp;
+<b class="nc"><i>171</i>&nbsp;        putString(160,10,&quot;HU:&quot;,TextColor.ANSI.BLACK.toColor(),new TextColor.RGB(0,255,0).toColor());</b>
+<b class="nc"><i>172</i>&nbsp;        putString(163,10, valueOf(playerHunger));</b>
+<i>173</i>&nbsp;
+<b class="nc"><i>174</i>&nbsp;        drawBar(168,10,20,new TextColor.RGB(34,134,34).toColor(),TextColor.ANSI.BLACK.toColor());</b>
+<b class="nc"><i>175</i>&nbsp;        drawBar(168,10,frac,new TextColor.RGB(0,255,0).toColor(),TextColor.ANSI.BLACK.toColor());</b>
+<i>176</i>&nbsp;    }
+<i>177</i>&nbsp;
+<i>178</i>&nbsp;    public void drawThirst(int playerThirst) {
+<b class="nc"><i>179</i>&nbsp;        int frac = getfrac(playerThirst,100,20);</b>
+<i>180</i>&nbsp;
+<b class="nc"><i>181</i>&nbsp;        putString(160,12,&quot;TH:&quot;,TextColor.ANSI.BLACK.toColor(),new TextColor.RGB(0,0,255).toColor());</b>
+<b class="nc"><i>182</i>&nbsp;        putString(163,12, valueOf(playerThirst));</b>
+<i>183</i>&nbsp;
+<b class="nc"><i>184</i>&nbsp;        drawBar(168, 12, 20, new TextColor.RGB(0,0,128).toColor(), TextColor.ANSI.BLACK.toColor());</b>
+<b class="nc"><i>185</i>&nbsp;        drawBar(168,12,frac,new TextColor.RGB(0,0,255).toColor(),TextColor.ANSI.BLACK.toColor());</b>
+<i>186</i>&nbsp;
+<i>187</i>&nbsp;    }
+<i>188</i>&nbsp;
+<i>189</i>&nbsp;    private String nspaces(int n){
+<b class="nc"><i>190</i>&nbsp;        return new String(new char[n]).replace(&quot;\0&quot;,&quot; &quot;);</b>
+<i>191</i>&nbsp;    }
+<i>192</i>&nbsp;
+<i>193</i>&nbsp;    public void drawStats(EStat stats) {
+<b class="nc"><i>194</i>&nbsp;        Color black = TextColor.ANSI.BLACK.toColor();</b>
+<b class="nc"><i>195</i>&nbsp;        Color yellow = new TextColor.RGB(255,255,51).toColor();</b>
+<b class="nc"><i>196</i>&nbsp;        Color white = TextColor.ANSI.WHITE.toColor();</b>
+<i>197</i>&nbsp;
+<b class="nc"><i>198</i>&nbsp;        putString(160,16,&quot;STATS&quot;,black,yellow);</b>
+<i>199</i>&nbsp;
+<b class="nc"><i>200</i>&nbsp;        putString(160,17,&quot;Str: &quot;,black,yellow);</b>
+<b class="nc"><i>201</i>&nbsp;        putString(165,17, valueOf(stats.getStr()));</b>
+<i>202</i>&nbsp;
+<b class="nc"><i>203</i>&nbsp;        putString(173,17,&quot;Melee DMG &quot;      + nspaces(4) + &quot;: &quot; ,black,yellow);</b>
+<b class="nc"><i>204</i>&nbsp;        putString(173 + 16,17, valueOf(stats.getMeleeDMG()));</b>
+<b class="nc"><i>205</i>&nbsp;        putString(173,18,&quot;Throw Bonus &quot;    + nspaces(2) + &quot;: &quot;,black,yellow);</b>
+<b class="nc"><i>206</i>&nbsp;        putString(173 + 16,18, valueOf(stats.getThrowbonus()));</b>
+<b class="nc"><i>207</i>&nbsp;        putString(173,19,&quot;Read Time &quot;      + nspaces(4) + &quot;: &quot; ,black,yellow);</b>
+<b class="nc"><i>208</i>&nbsp;        putString(173 + 16,19, valueOf(stats.getReadtime()));</b>
+<b class="nc"><i>209</i>&nbsp;        putString(173,20,&quot;Range Penalty &quot;  + &quot;: &quot;,black,yellow);</b>
+<b class="nc"><i>210</i>&nbsp;        putString(173 + 16,20, valueOf(stats.getRangedpen()));</b>
+<i>211</i>&nbsp;
+<i>212</i>&nbsp;
+<b class="nc"><i>213</i>&nbsp;        putString(160,18,&quot;Dex: &quot;,black,yellow);</b>
+<b class="nc"><i>214</i>&nbsp;        putString(165,18, valueOf(stats.getDex()));</b>
+<i>215</i>&nbsp;
+<b class="nc"><i>216</i>&nbsp;        putString(160,19,&quot;Int: &quot;,black,yellow);</b>
+<b class="nc"><i>217</i>&nbsp;        putString(165,19, valueOf(stats.getInt()));</b>
+<i>218</i>&nbsp;
+<b class="nc"><i>219</i>&nbsp;        putString(160,20,&quot;Per: &quot;,black,yellow);</b>
+<b class="nc"><i>220</i>&nbsp;        putString(165,20, valueOf(stats.getPer()));</b>
+<i>221</i>&nbsp;    }
+<i>222</i>&nbsp;
+<i>223</i>&nbsp;    public void drawEquips(List&lt;Item&gt; equips) {
+<b class="nc"><i>224</i>&nbsp;        Color black = TextColor.ANSI.BLACK.toColor();</b>
+<b class="nc"><i>225</i>&nbsp;        Color yellow = new TextColor.RGB(255,255,51).toColor();</b>
+<i>226</i>&nbsp;
+<i>227</i>&nbsp;
+<b class="nc"><i>228</i>&nbsp;        int line_number = 23;</b>
+<i>229</i>&nbsp;
+<b class="nc"><i>230</i>&nbsp;        putString(160, line_number, &quot;EQUIPAMENT:&quot;,black,yellow);</b>
+<b class="nc"><i>231</i>&nbsp;        line_number++;</b>
+<i>232</i>&nbsp;
+<b class="nc"><i>233</i>&nbsp;        int i = 0;</b>
+<i>234</i>&nbsp;
+<i>235</i>&nbsp;
+<b class="nc"><i>236</i>&nbsp;        for (Item item:equips) {</b>
+<i>237</i>&nbsp;            String itemname;
+<i>238</i>&nbsp;            String durability;
+<b class="nc"><i>239</i>&nbsp;            if (item.isNull()) {</b>
+<b class="nc"><i>240</i>&nbsp;                itemname = &quot;&quot;;</b>
+<b class="nc"><i>241</i>&nbsp;                durability = &quot;&quot;;</b>
+<i>242</i>&nbsp;            } else{
+<b class="nc"><i>243</i>&nbsp;                itemname = item.getName();</b>
+<b class="nc"><i>244</i>&nbsp;                durability = valueOf(item.getCurrentDurability());</b>
+<i>245</i>&nbsp;            }
+<i>246</i>&nbsp;
+<b class="nc"><i>247</i>&nbsp;            int n = (11 - Body_Part_Equip.getPart(i).length());</b>
+<b class="nc"><i>248</i>&nbsp;            String spaces = new String(new char[n]).replace(&quot;\0&quot;,&quot; &quot;);</b>
+<b class="nc"><i>249</i>&nbsp;            putString(160,line_number, Body_Part_Equip.getPart(i) +  spaces + &quot;: &quot; + itemname + &quot; &quot; + durability,black,yellow);</b>
+<b class="nc"><i>250</i>&nbsp;            line_number++;</b>
+<b class="nc"><i>251</i>&nbsp;            i++;</b>
+<b class="nc"><i>252</i>&nbsp;        }</b>
+<i>253</i>&nbsp;    }
+<i>254</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2019-06-02 23:46</div>
+</div>
+</body>
+</html>

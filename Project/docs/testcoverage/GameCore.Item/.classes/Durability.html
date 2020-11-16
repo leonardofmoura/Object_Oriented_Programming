@@ -1,0 +1,142 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: Durability</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">GameCore.Item</a> ]
+</div>
+
+<h1>Coverage Summary for Class: Durability (GameCore.Item)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Durability</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    18.2%
+  </span>
+  <span class="absValue">
+    (2/ 11)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    19.4%
+  </span>
+  <span class="absValue">
+    (6/ 31)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package GameCore.Item;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;public class Durability  {
+<i>4</i>&nbsp;    private int duraMax;
+<i>5</i>&nbsp;    private int currentDurability;
+<i>6</i>&nbsp;    private boolean usable;
+<b class="fc"><i>7</i>&nbsp;    Durability(int duraMax){</b>
+<b class="fc"><i>8</i>&nbsp;        if (validDurab(duraMax)) this.duraMax = duraMax;</b>
+<b class="nc"><i>9</i>&nbsp;        else this.duraMax = 0;</b>
+<b class="fc"><i>10</i>&nbsp;        this.currentDurability = duraMax;</b>
+<b class="fc"><i>11</i>&nbsp;        this.usable = true;</b>
+<b class="fc"><i>12</i>&nbsp;    }</b>
+<b class="nc"><i>13</i>&nbsp;    Durability(int duraMax,int currentDurability) throws InvalidDurability{</b>
+<b class="nc"><i>14</i>&nbsp;        if(!validDurab(duraMax) || !validDurab(currentDurability)) throw new InvalidDurability();</b>
+<b class="nc"><i>15</i>&nbsp;        this.duraMax = duraMax;</b>
+<b class="nc"><i>16</i>&nbsp;        this.currentDurability = currentDurability;</b>
+<b class="nc"><i>17</i>&nbsp;        this.usable = true;</b>
+<b class="nc"><i>18</i>&nbsp;    }</b>
+<i>19</i>&nbsp;    Durability(int duraMax, int currentDurability,boolean usable) throws InvalidDurability{
+<b class="nc"><i>20</i>&nbsp;        this(duraMax,currentDurability);</b>
+<b class="nc"><i>21</i>&nbsp;        this.usable = usable;</b>
+<b class="nc"><i>22</i>&nbsp;    }</b>
+<i>23</i>&nbsp;    private static boolean validDurab(int durability){
+<b class="fc"><i>24</i>&nbsp;        return durability &gt;= 0;</b>
+<i>25</i>&nbsp;    }
+<i>26</i>&nbsp;    public int repair(int dura) throws InvalidDurability{
+<b class="nc"><i>27</i>&nbsp;        if(!validDurab(dura)) throw new InvalidDurability();</b>
+<i>28</i>&nbsp;
+<b class="nc"><i>29</i>&nbsp;        currentDurability += dura;</b>
+<b class="nc"><i>30</i>&nbsp;        return currentDurability;</b>
+<i>31</i>&nbsp;    }
+<i>32</i>&nbsp;    public int upgrade(int dura) throws InvalidDurability{
+<b class="nc"><i>33</i>&nbsp;        if(!validDurab(dura)) throw new InvalidDurability();</b>
+<i>34</i>&nbsp;
+<b class="nc"><i>35</i>&nbsp;        duraMax += dura;</b>
+<b class="nc"><i>36</i>&nbsp;        return duraMax;</b>
+<i>37</i>&nbsp;    }
+<i>38</i>&nbsp;    public int damage(int dura) throws InvalidDurability{
+<b class="nc"><i>39</i>&nbsp;        if (!validDurab(dura)) throw new InvalidDurability();</b>
+<b class="nc"><i>40</i>&nbsp;        currentDurability -= (dura &gt;= currentDurability) ? currentDurability : dura;</b>
+<b class="nc"><i>41</i>&nbsp;        return currentDurability;</b>
+<i>42</i>&nbsp;    }
+<i>43</i>&nbsp;    public int permadamage(int dura) throws  InvalidDurability{
+<b class="nc"><i>44</i>&nbsp;        if(!validDurab(dura)) throw new InvalidDurability();</b>
+<b class="nc"><i>45</i>&nbsp;        duraMax -= (dura &gt;= duraMax) ? duraMax : dura;</b>
+<b class="nc"><i>46</i>&nbsp;        return duraMax;</b>
+<i>47</i>&nbsp;    }
+<i>48</i>&nbsp;    public boolean usable(){
+<b class="nc"><i>49</i>&nbsp;        return (currentDurability!=  0) &amp;&amp;  (duraMax!=  0) &amp;&amp;  this.usable;</b>
+<i>50</i>&nbsp;    }
+<i>51</i>&nbsp;
+<i>52</i>&nbsp;    public int getDuraMax() {
+<b class="nc"><i>53</i>&nbsp;        return duraMax;</b>
+<i>54</i>&nbsp;    }
+<i>55</i>&nbsp;
+<i>56</i>&nbsp;    public int getCurrentDurability() {
+<b class="nc"><i>57</i>&nbsp;        return currentDurability;</b>
+<i>58</i>&nbsp;    }
+<i>59</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2019-06-02 23:46</div>
+</div>
+</body>
+</html>

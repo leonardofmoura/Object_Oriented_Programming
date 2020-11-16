@@ -1,0 +1,182 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: Inventory</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">GameCore.Item</a> ]
+</div>
+
+<h1>Coverage Summary for Class: Inventory (GameCore.Item)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Inventory</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    81.8%
+  </span>
+  <span class="absValue">
+    (9/ 11)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    85%
+  </span>
+  <span class="absValue">
+    (34/ 40)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package GameCore.Item;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import java.util.ArrayList;
+<i>4</i>&nbsp;import java.util.List;
+<i>5</i>&nbsp;
+<i>6</i>&nbsp;import static java.lang.StrictMath.abs;
+<i>7</i>&nbsp;
+<i>8</i>&nbsp;public class Inventory {
+<i>9</i>&nbsp;    private List&lt;Item&gt; inventory;
+<i>10</i>&nbsp;
+<i>11</i>&nbsp;
+<i>12</i>&nbsp;    private Volume max_capacity;
+<i>13</i>&nbsp;    private Volume current_capacity;
+<i>14</i>&nbsp;
+<i>15</i>&nbsp;
+<i>16</i>&nbsp;
+<b class="fc"><i>17</i>&nbsp;    public Inventory(int capacity){</b>
+<b class="fc"><i>18</i>&nbsp;        if(capacity &gt; 0)</b>
+<b class="fc"><i>19</i>&nbsp;            this.max_capacity = new Volume(capacity);</b>
+<i>20</i>&nbsp;        else
+<b class="fc"><i>21</i>&nbsp;            this.max_capacity = new Volume(0);</b>
+<b class="fc"><i>22</i>&nbsp;        this.current_capacity = new Volume(0);</b>
+<b class="fc"><i>23</i>&nbsp;        this.inventory = new ArrayList&lt;&gt;();</b>
+<i>24</i>&nbsp;
+<i>25</i>&nbsp;
+<b class="fc"><i>26</i>&nbsp;    }</b>
+<i>27</i>&nbsp;
+<i>28</i>&nbsp;    public boolean canPutIn(Item item){
+<b class="fc"><i>29</i>&nbsp;        if(item instanceof NullItem || item instanceof NullWeapon || max_capacity.getVolume() == 0){</b>
+<b class="fc"><i>30</i>&nbsp;            return false;</b>
+<i>31</i>&nbsp;        }
+<b class="fc"><i>32</i>&nbsp;        return item.getVol().getVolume() + current_capacity.getVolume()&lt;= max_capacity.getVolume() ;</b>
+<i>33</i>&nbsp;    }
+<i>34</i>&nbsp;
+<i>35</i>&nbsp;    public boolean addItem(Item item){
+<b class="fc"><i>36</i>&nbsp;        if (canPutIn(item)){</b>
+<b class="fc"><i>37</i>&nbsp;            inventory.add(item);</b>
+<b class="fc"><i>38</i>&nbsp;            this.current_capacity.increase(item.getVol().getVolume());</b>
+<b class="fc"><i>39</i>&nbsp;            return true;</b>
+<i>40</i>&nbsp;        }
+<b class="nc"><i>41</i>&nbsp;            return false;</b>
+<i>42</i>&nbsp;    }
+<i>43</i>&nbsp;
+<i>44</i>&nbsp;    public Item removeItem(Item item){
+<b class="fc"><i>45</i>&nbsp;        for (Item i: this.inventory) {</b>
+<b class="fc"><i>46</i>&nbsp;            if (i.equals(item)){</b>
+<b class="fc"><i>47</i>&nbsp;                this.inventory.remove(i);</b>
+<b class="fc"><i>48</i>&nbsp;                this.current_capacity.increase(i.getVol().getVolume());</b>
+<b class="fc"><i>49</i>&nbsp;                return i;</b>
+<i>50</i>&nbsp;            }
+<b class="nc"><i>51</i>&nbsp;        }</b>
+<b class="fc"><i>52</i>&nbsp;        return new NullItem();</b>
+<i>53</i>&nbsp;    }
+<i>54</i>&nbsp;
+<i>55</i>&nbsp;    public Item removeItem(int index){
+<i>56</i>&nbsp;        Item i;
+<i>57</i>&nbsp;        try{
+<b class="fc"><i>58</i>&nbsp;            i = this.inventory.get(index);</b>
+<b class="nc"><i>59</i>&nbsp;        } catch (Exception e) {</b>
+<b class="nc"><i>60</i>&nbsp;            return new NullItem();</b>
+<b class="fc"><i>61</i>&nbsp;        }</b>
+<i>62</i>&nbsp;
+<b class="fc"><i>63</i>&nbsp;        this.inventory.remove(i);</b>
+<b class="fc"><i>64</i>&nbsp;        this.current_capacity.increase(i.getVol().getVolume());</b>
+<b class="fc"><i>65</i>&nbsp;        return i;</b>
+<i>66</i>&nbsp;    }
+<i>67</i>&nbsp;
+<i>68</i>&nbsp;    public boolean canMove(){
+<b class="nc"><i>69</i>&nbsp;        return this.max_capacity.getVolume() &gt; this.current_capacity.getVolume();</b>
+<i>70</i>&nbsp;    }
+<i>71</i>&nbsp;
+<i>72</i>&nbsp;    public void updateMaxCapacity(int capacity){
+<i>73</i>&nbsp;
+<b class="fc"><i>74</i>&nbsp;        this.max_capacity.setVolume(capacity);</b>
+<b class="fc"><i>75</i>&nbsp;    }</b>
+<i>76</i>&nbsp;
+<i>77</i>&nbsp;    public List&lt;Item&gt; getInventory(){
+<b class="fc"><i>78</i>&nbsp;        return this.inventory;</b>
+<i>79</i>&nbsp;    }
+<i>80</i>&nbsp;
+<i>81</i>&nbsp;
+<i>82</i>&nbsp;    public boolean findItem(Item item){
+<b class="fc"><i>83</i>&nbsp;        for (Item i: this.inventory) {</b>
+<b class="fc"><i>84</i>&nbsp;            if(i.equals(item)){</b>
+<b class="fc"><i>85</i>&nbsp;                return true;</b>
+<i>86</i>&nbsp;            }
+<b class="fc"><i>87</i>&nbsp;        }</b>
+<b class="fc"><i>88</i>&nbsp;        return false;</b>
+<i>89</i>&nbsp;    }
+<i>90</i>&nbsp;
+<i>91</i>&nbsp;    public Volume getMax_capacity() {
+<b class="fc"><i>92</i>&nbsp;        return max_capacity;</b>
+<i>93</i>&nbsp;    }
+<i>94</i>&nbsp;
+<i>95</i>&nbsp;    public Volume getCurrent_capacity() {
+<b class="nc"><i>96</i>&nbsp;        return current_capacity;</b>
+<i>97</i>&nbsp;    }
+<i>98</i>&nbsp;
+<i>99</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2019-06-02 23:46</div>
+</div>
+</body>
+</html>

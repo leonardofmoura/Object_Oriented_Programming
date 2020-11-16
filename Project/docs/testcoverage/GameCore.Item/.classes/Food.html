@@ -1,0 +1,117 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: Food</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">GameCore.Item</a> ]
+</div>
+
+<h1>Coverage Summary for Class: Food (GameCore.Item)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Food</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 11)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package GameCore.Item;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import GameCore.Stats.Buff;
+<i>4</i>&nbsp;import GameCore.Stats.SurvStats;
+<i>5</i>&nbsp;
+<i>6</i>&nbsp;public abstract class Food extends Item implements Consumable{
+<i>7</i>&nbsp;    private int uses;
+<i>8</i>&nbsp;
+<i>9</i>&nbsp;    private SurvStats stats;
+<b class="nc"><i>10</i>&nbsp;    Food(String name, String desc, Buff buff,Volume vol, int thirst, int hunger){</b>
+<b class="nc"><i>11</i>&nbsp;        this.name = name;</b>
+<b class="nc"><i>12</i>&nbsp;        this.description = desc;</b>
+<b class="nc"><i>13</i>&nbsp;        this.vol = vol;</b>
+<b class="nc"><i>14</i>&nbsp;        this.buff = buff;</b>
+<b class="nc"><i>15</i>&nbsp;        this.stats = new SurvStats(hunger,thirst);</b>
+<b class="nc"><i>16</i>&nbsp;        this.uses = 1;</b>
+<i>17</i>&nbsp;    }
+<i>18</i>&nbsp;
+<i>19</i>&nbsp;    Food(String name, String desc, Buff buff,Volume vol, int thirst, int hunger,int uses){
+<b class="nc"><i>20</i>&nbsp;        this(name,desc,buff, vol,thirst,hunger);</b>
+<b class="nc"><i>21</i>&nbsp;        this.uses = (uses &gt; 0) ? uses : 1;</b>
+<i>22</i>&nbsp;    }
+<i>23</i>&nbsp;
+<i>24</i>&nbsp;    @Override
+<i>25</i>&nbsp;    public SurvStats comsume() {
+<b class="nc"><i>26</i>&nbsp;        return (this.uses &lt;= 0) ? new SurvStats(0,0) : this.stats;</b>
+<i>27</i>&nbsp;    }
+<i>28</i>&nbsp;
+<i>29</i>&nbsp;
+<i>30</i>&nbsp;    public int getUses() {
+<b class="nc"><i>31</i>&nbsp;        return uses;</b>
+<i>32</i>&nbsp;    }
+<i>33</i>&nbsp;
+<i>34</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2019-06-02 23:46</div>
+</div>
+</body>
+</html>

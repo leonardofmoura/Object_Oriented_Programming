@@ -1,0 +1,159 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: Weapon</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">GameCore.Item</a> ]
+</div>
+
+<h1>Coverage Summary for Class: Weapon (GameCore.Item)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Weapon</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    25%
+  </span>
+  <span class="absValue">
+    (3/ 12)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    36.4%
+  </span>
+  <span class="absValue">
+    (8/ 22)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package GameCore.Item;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import GameCore.Position;
+<i>4</i>&nbsp;import GameCore.Stats.Buff;
+<i>5</i>&nbsp;import GameCore.Stats.EStat;
+<i>6</i>&nbsp;
+<i>7</i>&nbsp;import java.util.Random;
+<i>8</i>&nbsp;
+<i>9</i>&nbsp;public abstract class  Weapon extends Item{
+<i>10</i>&nbsp;    protected final boolean TWO_HANDED;
+<i>11</i>&nbsp;    protected final int BASE_DMG;
+<i>12</i>&nbsp;    protected final int ACCURACY;
+<i>13</i>&nbsp;    protected final double RANGE;
+<i>14</i>&nbsp;
+<i>15</i>&nbsp;    Weapon(String name, String description, int max_durability, Buff buff, int vol, boolean two_hand, int base_dmg, int accuracy,double distance){
+<b class="fc"><i>16</i>&nbsp;        super(name,description,max_durability,buff,vol);</b>
+<b class="fc"><i>17</i>&nbsp;        BASE_DMG = (checkDmg(base_dmg)) ? base_dmg : 1;</b>
+<b class="fc"><i>18</i>&nbsp;        ACCURACY = (checkAcc(accuracy))? accuracy : 50;</b>
+<b class="fc"><i>19</i>&nbsp;        TWO_HANDED = two_hand;</b>
+<b class="fc"><i>20</i>&nbsp;        RANGE = distance;</b>
+<b class="fc"><i>21</i>&nbsp;    }</b>
+<i>22</i>&nbsp;
+<i>23</i>&nbsp;
+<i>24</i>&nbsp;    private boolean checkDmg(int dmg){
+<b class="fc"><i>25</i>&nbsp;        return dmg &gt; 0;</b>
+<i>26</i>&nbsp;    }
+<i>27</i>&nbsp;
+<i>28</i>&nbsp;    private boolean checkAcc(int acc){
+<b class="fc"><i>29</i>&nbsp;        return acc &gt; 0 &amp;&amp;  acc &lt;= 100;</b>
+<i>30</i>&nbsp;    }
+<i>31</i>&nbsp;
+<i>32</i>&nbsp;    public boolean isTwoHanded() {
+<b class="nc"><i>33</i>&nbsp;        return TWO_HANDED;</b>
+<i>34</i>&nbsp;    }
+<i>35</i>&nbsp;
+<i>36</i>&nbsp;    public int getAccuracy() {
+<b class="nc"><i>37</i>&nbsp;        return ACCURACY;</b>
+<i>38</i>&nbsp;    }
+<i>39</i>&nbsp;
+<i>40</i>&nbsp;    public int getBaseDmg() {
+<b class="nc"><i>41</i>&nbsp;        return BASE_DMG;</b>
+<i>42</i>&nbsp;    }
+<i>43</i>&nbsp;
+<i>44</i>&nbsp;    public  int calcDmg(){
+<b class="nc"><i>45</i>&nbsp;        return BASE_DMG;</b>
+<i>46</i>&nbsp;    }
+<i>47</i>&nbsp;
+<i>48</i>&nbsp;    int getAccuracy(EStat stats){
+<b class="nc"><i>49</i>&nbsp;        return ACCURACY;</b>
+<i>50</i>&nbsp;    }
+<i>51</i>&nbsp;
+<i>52</i>&nbsp;    public int hit(double distance){
+<b class="nc"><i>53</i>&nbsp;        if(_hit(distance)){</b>
+<b class="nc"><i>54</i>&nbsp;            return this.calcDmg();</b>
+<i>55</i>&nbsp;        } else{
+<b class="nc"><i>56</i>&nbsp;            return 0;</b>
+<i>57</i>&nbsp;        }
+<i>58</i>&nbsp;    }
+<i>59</i>&nbsp;
+<i>60</i>&nbsp;
+<i>61</i>&nbsp;    private boolean _hit(double distance){
+<b class="nc"><i>62</i>&nbsp;        if(!canHit(distance)){</b>
+<b class="nc"><i>63</i>&nbsp;            return false;</b>
+<i>64</i>&nbsp;        }
+<b class="nc"><i>65</i>&nbsp;        Random r = new Random();</b>
+<b class="nc"><i>66</i>&nbsp;        return r.nextInt(100) &lt;= ACCURACY;</b>
+<i>67</i>&nbsp;    }
+<i>68</i>&nbsp;
+<i>69</i>&nbsp;    public double getRange() {
+<b class="nc"><i>70</i>&nbsp;        return RANGE;</b>
+<i>71</i>&nbsp;    }
+<i>72</i>&nbsp;
+<i>73</i>&nbsp;    public boolean canHit(double distance){
+<b class="nc"><i>74</i>&nbsp;        return distance &lt;= this.RANGE;</b>
+<i>75</i>&nbsp;    }
+<i>76</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2019-06-02 23:46</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,263 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: EStat</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">GameCore.Stats</a> ]
+</div>
+
+<h1>Coverage Summary for Class: EStat (GameCore.Stats)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">EStat</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 28)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 67)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package GameCore.Stats;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import GameCore.Item.Inventory;
+<i>4</i>&nbsp;
+<i>5</i>&nbsp;import java.util.ArrayList;
+<i>6</i>&nbsp;
+<i>7</i>&nbsp;public class  EStat {
+<i>8</i>&nbsp;    private Stat Str, Dex, Int, Per;
+<i>9</i>&nbsp;    private final Stat STR,DEX,INT,PER;
+<i>10</i>&nbsp;    private int hp;
+<i>11</i>&nbsp;    //Strength dependent stats
+<i>12</i>&nbsp;    private final static int BASE_HP = 84;
+<i>13</i>&nbsp;    private final static int BASE_CARRYW = 45;
+<i>14</i>&nbsp;    private final static int BASE_MELEEDMG = 4;
+<i>15</i>&nbsp;    //Dexterity dependent stats
+<i>16</i>&nbsp;    private final static int BASE_MELEETOHIT = 84;
+<i>17</i>&nbsp;    private final static int BASE_THROWINGBONUS = 0;
+<i>18</i>&nbsp;    private final static int BASE_RANGEDPEN = -60;
+<i>19</i>&nbsp;    //Intelligence dependent stats
+<i>20</i>&nbsp;    private final static int BASE_READINGTIME = 100;
+<i>21</i>&nbsp;    private final static double BASE_SKILLRUST = 50;
+<i>22</i>&nbsp;    private ArrayList&lt;Buff&gt; buffs;
+<i>23</i>&nbsp;
+<i>24</i>&nbsp;
+<b class="nc"><i>25</i>&nbsp;    public EStat() {</b>
+<b class="nc"><i>26</i>&nbsp;        STR = new Stat(8);</b>
+<b class="nc"><i>27</i>&nbsp;        DEX = new Stat(8);</b>
+<b class="nc"><i>28</i>&nbsp;        INT = new Stat(8);</b>
+<b class="nc"><i>29</i>&nbsp;        PER = new Stat(8);</b>
+<b class="nc"><i>30</i>&nbsp;        resetstats();</b>
+<b class="nc"><i>31</i>&nbsp;        buffs = new ArrayList&lt;&gt;();</b>
+<b class="nc"><i>32</i>&nbsp;        this.hp = this.getMaxHP();</b>
+<i>33</i>&nbsp;    }
+<i>34</i>&nbsp;
+<b class="nc"><i>35</i>&nbsp;    public EStat(int str, int dex, int intl, int per) {</b>
+<b class="nc"><i>36</i>&nbsp;        STR = new Stat(str);</b>
+<b class="nc"><i>37</i>&nbsp;        DEX = new Stat(dex);</b>
+<b class="nc"><i>38</i>&nbsp;        INT = new Stat(intl);</b>
+<b class="nc"><i>39</i>&nbsp;        PER = new Stat(per);</b>
+<b class="nc"><i>40</i>&nbsp;        resetstats();</b>
+<b class="nc"><i>41</i>&nbsp;        buffs = new ArrayList&lt;&gt;();</b>
+<b class="nc"><i>42</i>&nbsp;        this.hp = this.getMaxHP();</b>
+<i>43</i>&nbsp;    }
+<i>44</i>&nbsp;
+<i>45</i>&nbsp;    private int everyTwo(int v) {
+<b class="nc"><i>46</i>&nbsp;        return ((v % 2 == 0) ? v : v - 1) / 2;</b>
+<i>47</i>&nbsp;    }
+<i>48</i>&nbsp;
+<i>49</i>&nbsp;
+<i>50</i>&nbsp;    private Stat checkStat(int stat, int newstat) {//TODO  make test
+<b class="nc"><i>51</i>&nbsp;        return new Stat((stat &gt;= 4 &amp;&amp; stat &lt;= 25) ? newstat : stat);</b>
+<i>52</i>&nbsp;    }
+<i>53</i>&nbsp;
+<i>54</i>&nbsp;    public int getPer() {
+<b class="nc"><i>55</i>&nbsp;        return Per.getValue();</b>
+<i>56</i>&nbsp;    }
+<i>57</i>&nbsp;
+<i>58</i>&nbsp;    public void setPer(int per) {
+<b class="nc"><i>59</i>&nbsp;        Per = this.checkStat(this.Per.getValue(), per);</b>
+<i>60</i>&nbsp;    }
+<i>61</i>&nbsp;
+<i>62</i>&nbsp;    public int getInt() {
+<b class="nc"><i>63</i>&nbsp;        return Int.getValue();</b>
+<i>64</i>&nbsp;    }
+<i>65</i>&nbsp;
+<i>66</i>&nbsp;    public void setInt(int anInt) {
+<b class="nc"><i>67</i>&nbsp;        Int = this.checkStat(this.Int.getValue(), anInt);</b>
+<i>68</i>&nbsp;    }
+<i>69</i>&nbsp;
+<i>70</i>&nbsp;    public int getDex() {
+<b class="nc"><i>71</i>&nbsp;        return Dex.getValue();</b>
+<i>72</i>&nbsp;    }
+<i>73</i>&nbsp;
+<i>74</i>&nbsp;    public void setDex(int dex) {
+<b class="nc"><i>75</i>&nbsp;        Dex = this.checkStat(this.Dex.getValue(), dex);</b>
+<i>76</i>&nbsp;    }
+<i>77</i>&nbsp;
+<i>78</i>&nbsp;    public int getStr() {
+<b class="nc"><i>79</i>&nbsp;        return Str.getValue();</b>
+<i>80</i>&nbsp;    }
+<i>81</i>&nbsp;
+<i>82</i>&nbsp;    public void setStr(int str) {
+<b class="nc"><i>83</i>&nbsp;        Str = this.checkStat(this.Str.getValue(), str);</b>
+<i>84</i>&nbsp;    }
+<i>85</i>&nbsp;
+<i>86</i>&nbsp;    public int getMaxHP() {
+<b class="nc"><i>87</i>&nbsp;        return BASE_HP + (Str.getValue() - 8) * 3;</b>
+<i>88</i>&nbsp;    }
+<i>89</i>&nbsp;
+<i>90</i>&nbsp;    public int getHp() {
+<b class="nc"><i>91</i>&nbsp;        return hp;</b>
+<i>92</i>&nbsp;    }
+<i>93</i>&nbsp;
+<i>94</i>&nbsp;    public int getCarryW() {
+<b class="nc"><i>95</i>&nbsp;        return BASE_CARRYW + (Str.getValue() - 8) * 4;</b>
+<i>96</i>&nbsp;    }
+<i>97</i>&nbsp;
+<i>98</i>&nbsp;    public int getMeleeDMG() {
+<b class="nc"><i>99</i>&nbsp;        return BASE_MELEEDMG + everyTwo((Str.getValue() - 8)) * 4;</b>
+<i>100</i>&nbsp;    } //TODO  make test
+<i>101</i>&nbsp;
+<i>102</i>&nbsp;    public int getMeleetohit() {
+<b class="nc"><i>103</i>&nbsp;        return BASE_MELEETOHIT + everyTwo(Dex.getValue() - 8);</b>
+<i>104</i>&nbsp;    }//TODO  make test
+<i>105</i>&nbsp;
+<i>106</i>&nbsp;    public int getThrowbonus() {//TODO  make test
+<b class="nc"><i>107</i>&nbsp;        int tmp = Dex.getValue() - 8;</b>
+<b class="nc"><i>108</i>&nbsp;        return BASE_THROWINGBONUS + ((tmp &gt; 9) ? tmp - 9 : 0);</b>
+<i>109</i>&nbsp;    }
+<i>110</i>&nbsp;
+<i>111</i>&nbsp;    public int getReadtime() {//TODO  make test
+<b class="nc"><i>112</i>&nbsp;        return BASE_READINGTIME - Int.getValue() - 8 * 5;</b>
+<i>113</i>&nbsp;    }
+<i>114</i>&nbsp;
+<i>115</i>&nbsp;    public double getSkillrus() {//TODO  make test
+<b class="nc"><i>116</i>&nbsp;        return BASE_SKILLRUST - Int.getValue() - 8 * 3.5;</b>
+<i>117</i>&nbsp;    }
+<i>118</i>&nbsp;
+<i>119</i>&nbsp;    public int getRangedpen() {//TODO  make test
+<b class="nc"><i>120</i>&nbsp;        int tmp = BASE_RANGEDPEN + 15 * (Dex.getValue() - 8 + Per.getValue() - 8);</b>
+<b class="nc"><i>121</i>&nbsp;        return (tmp &gt; 0) ? 0 : tmp;</b>
+<i>122</i>&nbsp;    }
+<i>123</i>&nbsp;
+<i>124</i>&nbsp;    private void resetstats(){
+<b class="nc"><i>125</i>&nbsp;        Str = STR;</b>
+<b class="nc"><i>126</i>&nbsp;        Dex = DEX;</b>
+<b class="nc"><i>127</i>&nbsp;        Int = INT;</b>
+<b class="nc"><i>128</i>&nbsp;        Per = PER;</b>
+<i>129</i>&nbsp;    }
+<i>130</i>&nbsp;
+<i>131</i>&nbsp;    public ArrayList&lt;Buff&gt; getBuffs() { //TODO  make test
+<b class="nc"><i>132</i>&nbsp;        return buffs;</b>
+<i>133</i>&nbsp;    }
+<i>134</i>&nbsp;
+<i>135</i>&nbsp;    public void addBuff(Buff buff) { //TODO  make test
+<b class="nc"><i>136</i>&nbsp;        this.buffs.add(buff);</b>
+<b class="nc"><i>137</i>&nbsp;        this.updateStatsbuff(buff);</b>
+<i>138</i>&nbsp;    }
+<i>139</i>&nbsp;
+<i>140</i>&nbsp;    public void removeBuff(Buff buff) { //TODO  make test
+<b class="nc"><i>141</i>&nbsp;        this.Str.clear_buffs();</b>
+<b class="nc"><i>142</i>&nbsp;        this.Dex.clear_buffs();</b>
+<b class="nc"><i>143</i>&nbsp;        this.Int.clear_buffs();</b>
+<b class="nc"><i>144</i>&nbsp;        this.Per.clear_buffs();</b>
+<b class="nc"><i>145</i>&nbsp;        this.buffs.remove(buff);</b>
+<b class="nc"><i>146</i>&nbsp;        if(this.hp &gt;= this.getMaxHP())</b>
+<b class="nc"><i>147</i>&nbsp;            this.hp -=  buff.getBonusHp();</b>
+<b class="nc"><i>148</i>&nbsp;        resetstats();</b>
+<b class="nc"><i>149</i>&nbsp;        for (Buff b : this.buffs) {</b>
+<b class="nc"><i>150</i>&nbsp;            updateStatsbuff(b);</b>
+<b class="nc"><i>151</i>&nbsp;        }</b>
+<i>152</i>&nbsp;
+<i>153</i>&nbsp;    }
+<i>154</i>&nbsp;
+<i>155</i>&nbsp;    public int getDamaged(int dmg){
+<b class="nc"><i>156</i>&nbsp;        this.hp = (hp &gt;= dmg) ? hp-dmg : 0;</b>
+<b class="nc"><i>157</i>&nbsp;        return this.hp;</b>
+<i>158</i>&nbsp;    }
+<i>159</i>&nbsp;
+<i>160</i>&nbsp;
+<i>161</i>&nbsp;    private void updateStatsbuff(Buff buff) { //TODO  make test
+<b class="nc"><i>162</i>&nbsp;        if (buff.getStr() != 0) {</b>
+<b class="nc"><i>163</i>&nbsp;            this.Str.add_buff(buff.getStr());</b>
+<b class="nc"><i>164</i>&nbsp;            this.hp += buff.getBonusHp();</b>
+<i>165</i>&nbsp;        }
+<b class="nc"><i>166</i>&nbsp;        if (buff.getDex() != 0) {</b>
+<b class="nc"><i>167</i>&nbsp;            this.Dex.add_buff(buff.getDex());</b>
+<i>168</i>&nbsp;        }
+<b class="nc"><i>169</i>&nbsp;        if (buff.getInt() != 0) {</b>
+<b class="nc"><i>170</i>&nbsp;            this.Int.add_buff(buff.getInt());</b>
+<i>171</i>&nbsp;        }
+<b class="nc"><i>172</i>&nbsp;        if (buff.getPer() != 0) {</b>
+<b class="nc"><i>173</i>&nbsp;            this.Per.add_buff(buff.getPer());</b>
+<i>174</i>&nbsp;        }
+<i>175</i>&nbsp;    }
+<i>176</i>&nbsp;
+<i>177</i>&nbsp;    public void heal(int health) {
+<b class="nc"><i>178</i>&nbsp;        this.hp += (health &gt; 0) ? health : 0;</b>
+<i>179</i>&nbsp;    }
+<i>180</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2019-06-02 23:46</div>
+</div>
+</body>
+</html>
