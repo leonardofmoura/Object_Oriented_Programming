@@ -20,4 +20,4 @@ Project developed in the course, implementing all concepts above.  Calamity: Bla
 
 ---
 
-**Note**:If find some mistake in this readme or any other part of this repo, feel free to tell me about it!
+**Note**: If you find some mistake in this readme or any other part of this repo, feel free to tell me about it!
