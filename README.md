@@ -1,4 +1,4 @@
-# FEUP-LPOO
+# Object Oriented Programming
 Repository created to host projects elaborated in the Object Oriented Programming Laboratory course.
 
 The Course focuses on object oriented programming concepts, design patterns and the Java Language.
